@@ -9,13 +9,13 @@
     <form @submit.prevent="gravar()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input id="titulo" autocomplete="off" v-model="foto.titulo">
+        <input id="titulo" autocomplete="off" v-model.lazy="foto.titulo">
       </div>
 
       <div class="controle">
         <label for="url">URL</label>
-        <input id="url" autocomplete="off" v-model="foto.url" >
-        <imagem-responsiva/>
+        <input id="url" autocomplete="off" v-model.lazy="foto.url" >
+        <imagem-responsiva v-show="foto.url" :titulo="foto.titulo"/>
       </div>
 
       <div class="controle">
