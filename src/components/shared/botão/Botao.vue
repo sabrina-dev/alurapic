@@ -5,20 +5,28 @@
 import { computed } from 'vue';
 
 export default {
-    props:['tipo', 'rotulo', 'confirmacao'],
-    methods: { disparaAcao(){
-        if(this.confirmacao)
-        this.$emit('ativado');
-    }
+    props:['tipo', 'rotulo', 'confirmacao', 'estilo'],
+   
+    methods: { 
+        disparaAcao(){
+        
+            if(this.confirmacao){
+                if (confirm('Confirma operação?')){
+                    this.$emit('ativado');
+                }
+                return;
+            }
+            this.$emit('botãoAtivado');
  }  
-}
+},
 computed:{
-    estiloDoBotao() {
-        if(this.estilo == 'padrao' || !this.estilo) return 'botao botao-padrao'
-        if(this.estilo == 'perigo') return 'botao botao-perigo'
-
-    }
+    estiloDoBotao(){
+        if(this.estilo == 'padrao' || !this.estilo) return 'botao botao-padrao';
+        if(this.estilo == 'perigo') return 'botao botao-perigo';
 }
+}
+}
+
 </script>
 <style scoped>
     .botao {

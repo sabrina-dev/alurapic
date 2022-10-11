@@ -3,11 +3,21 @@
     <div>
       <h1 class="centralizado">{{ titulo }}</h1>
   <input type="search" class="filtro" v-on:input="filtro = $event.target.value" placeholder="filtre por parte do titulo" >
-      <ul class="lista-fotos">
-         <li class="lista-fotos-item" v-for="foto in fotosComFiltro" :key="foto.titulo">
+     
+  <ul class="lista-fotos">       
+        <li class="lista-fotos-item" v-for="foto in fotosComFiltro" :key="foto.titulo">
           <meu-painel :titulo="foto.titulo">
-           <imagem-responsiva :url="foto.url" :titulo="foto.titulo"></imagem-responsiva>
-           <meu-botao tipo="button" rotulo="REMOVER" @botao-ativado="remove(foto) :confimacao="true"  ></meu-botao>
+           
+            <imagem-responsiva v-meu-transform="{ incremento: 15, animate: true }" :url="foto.url" :titulo="foto.titulo"></imagem-responsiva>
+         
+            <meu-botao 
+           tipo="button" 
+           rotulo="REMOVER" 
+           @botaoAtivado="remove(foto)"
+           :confimacao="true"
+           estilo="perigo"
+           ></meu-botao>
+
           </meu-painel>
           
         </li>
@@ -41,20 +51,22 @@
   fotosComFiltro() {
   
   if(this.filtro){
-  let exp = new RegExp(this.filtro.trim(), 'i')
+  let exp = new RegExp(this.filtro.trim(), 'i');
   return this.fotos.filter(foto => exp.test(foto.titulo));
   } else {
     return this.fotos;
-  }  
-  }  
-    },
+    }  
+   }  
+  },
     methods: {
-
-    disparaAcao(){
-      if (confirm('confirmar operação?')){
-      alert('Remover a foto' + foto.titulo);
-    }
-  }
+remove(foto){
+  alert('remover a foto' + foto.titulo);
+}
+    // disparaAcao(){
+    //   if (confirm('confirmar operação?')){
+    //   alert('Remover a foto' + foto.titulo);
+   // }
+ // }
   },
     created(){
      let promisse = this.$http.get('http://localhost:3000/v1/fotos');
