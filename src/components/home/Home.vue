@@ -13,7 +13,7 @@
             <meu-botao 
            tipo="button" 
            rotulo="REMOVER" 
-           @botaoAtivado="remove(foto)"
+           @botaoAtivado= remove(foto);
            :confimacao="true"
            estilo="perigo"
            ></meu-botao>
@@ -61,7 +61,7 @@
   },
     methods: {
 remove(foto){
-  
+
  this.$http.delete('http://localhost:3000/v1/fotos' + foto._id)
  .then(()=>{
   let indice = this.fotos.indexOf(foto);
