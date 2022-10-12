@@ -7,14 +7,14 @@
   <ul class="lista-fotos">       
         <li class="lista-fotos-item" v-for="foto in fotosComFiltro" :key="foto.titulo">
           <meu-painel :titulo="foto.titulo">
-           
+       
             <imagem-responsiva v-meu-transform:scale.animate="1.2" :url="foto.url" :titulo="foto.titulo"></imagem-responsiva>
          
             <meu-botao 
            tipo="button" 
            rotulo="REMOVER" 
-           @botaoAtivado= remove(foto);
-           :confimacao="true"
+           @botaoAtivado="remove(foto)"
+           :confirmacao="true"
            estilo="perigo"
            ></meu-botao>
 
@@ -65,7 +65,7 @@ remove(foto){
  this.$http.delete('http://localhost:3000/v1/fotos' + foto._id)
  .then(()=>{
   let indice = this.fotos.indexOf(foto);
-  this.fotos.splice(indice,1);  
+  this.fotos.splice(indice, 1);  
   this.mensagem = 'foto removida com sucesso';
   }, err => { 
     console.log(err);
