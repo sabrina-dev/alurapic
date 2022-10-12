@@ -1,7 +1,6 @@
 <!-- alurapic/src/components/cadastro/Cadastro.vue -->
 
 <template>
-
   <div>
     <h1 class="centralizado">Cadastro</h1>
     <h2 class="centralizado"></h2>
@@ -9,25 +8,30 @@
     <form @submit.prevent="gravar()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
-        <input id="titulo" autocomplete="off" v-model.lazy="foto.titulo">
+        <input id="titulo" autocomplete="off" v-model.lazy="foto.titulo" />
       </div>
 
       <div class="controle">
         <label for="url">URL</label>
-        <input id="url" autocomplete="off" v-model.lazy="foto.url" >
-        <imagem-responsiva v-show="foto.url" :titulo="foto.titulo"/>
+        <input id="url" autocomplete="off" v-model.lazy="foto.url" />
+        <imagem-responsiva v-show="foto.url" :titulo="foto.titulo" />
       </div>
 
       <div class="controle">
         <label for="descricao">DESCRIÇÃO</label>
-        <textarea id="descricao" autocomplete="off" v-model="foto.descricao" ></textarea>
+        <textarea
+          id="descricao"
+          autocomplete="off"
+          v-model="foto.descricao"
+        ></textarea>
       </div>
 
       <div class="centralizado">
-        <meu-botao rotulo="GRAVAR" tipo="submit"/>
-        <router-link to="/"><meu-botao rotulo="VOLTAR" tipo="button"/></router-link>
+        <meu-botao rotulo="GRAVAR" tipo="submit" />
+        <router-link to="/"
+          ><meu-botao rotulo="VOLTAR" tipo="button"
+        /></router-link>
       </div>
-
     </form>
   </div>
 </template>
@@ -36,6 +40,7 @@
 
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue'
 import Botao from '../shared/botão/Botao.vue';
+import Foto from '../../domain/foto/foto';
 
 export default {
 
@@ -47,50 +52,41 @@ export default {
   data(){
 
     return {
-
-      foto: {
-        titulo:'',
-        url: '',
-        descricao: ''
+    foto:  new Foto()
       }
     }
-  },
-  methods: {
-  gravar() {
-   this.foto = {
-      titulo:'',
-      url: '',
-      descricao: ''
-   }
-  }}
+  }
 
-} 
+  methods: {
+  
+  gravar()
+  {this.foto =  new Foto();}
+  }
+
 
 
 </script>
 <style scoped>
+.centralizado {
+  text-align: center;
+}
+.controle {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+.controle label {
+  display: block;
+  font-weight: bold;
+}
 
-  .centralizado {
-    text-align: center;
-  }
-  .controle {
-    font-size: 1.2em;
-    margin-bottom: 20px;
+.controle label + input,
+.controle textarea {
+  width: 100%;
+  font-size: inherit;
+  border-radius: 5px;
+}
 
-  }
-  .controle label {
-    display: block;
-    font-weight: bold;
-  }
-
- .controle label + input, .controle textarea {
-    width: 100%;
-    font-size: inherit;
-    border-radius: 5px
-  }
-
-  .centralizado {
-    text-align: center;
-  }
-
+.centralizado {
+  text-align: center;
+}
 </style>
