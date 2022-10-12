@@ -67,8 +67,6 @@ export default {
 }
 
  
-
- 
 </script>
 <style scoped>
 .centralizado {
