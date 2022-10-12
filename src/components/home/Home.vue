@@ -59,21 +59,27 @@
     }  
    }  
   },
-    methods: {
-remove(foto){
+  // alurapic/src/components/home/Home.vue 
+//  código anterior omitido 
+  methods: {
 
- this.$http.delete('http://localhost:3000/v1/fotos' + foto._id)
- .then(()=>{
-  let indice = this.fotos.indexOf(foto);
-  this.fotos.splice(indice, 1);  
-  this.mensagem = 'foto removida com sucesso';
-  }, err => { 
-    console.log(err);
-  this.mensagem = 'não foi possivel remover a foto';
-  });
-}
-
+    remove(foto) {
+      this.$http
+        .delete(`http://localhost:3000/v1/fotos/${foto._id}`)
+        .then(
+          () => {
+            let indice = this.fotos.indexOf(foto); // acha a posição da foto na lista
+            this.fotos.splice(indice, 1); // a instrução altera o array
+            this.mensagem = 'Foto removida com sucesso'
+          }, 
+          err => {
+            this.mensagem = 'Não foi possível remover a foto';
+            console.log(err);
+          }
+        )
+    }
   },
+// código posterior omitido
     created(){
      let promisse = this.$http.get('http://localhost:3000/v1/fotos');
      promisse.then(res => {res.json().then(fotos=> this.fotos = fotos);
