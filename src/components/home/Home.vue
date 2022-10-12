@@ -44,7 +44,8 @@
   
         titulo: 'Alurapic', 
         fotos: [],
-        filtro: ''
+        filtro: '',
+        mensagem: '',
       }
     },
   computed: {
@@ -60,13 +61,18 @@
   },
     methods: {
 remove(foto){
-  alert('remover a foto' + foto.titulo);
+  
+ this.$http.delete('http://localhost:3000/v1/fotos' + foto._id)
+ .then(()=>{
+  let indice = this.fotos.indexOf(foto);
+  this.fotos.splice(indice,1);  
+  this.mensagem = 'foto removida com sucesso';
+  }, err => { 
+    console.log(err);
+  this.mensagem = 'não foi possivel remover a foto';
+  });
 }
-    // disparaAcao(){
-    //   if (confirm('confirmar operação?')){
-    //   alert('Remover a foto' + foto.titulo);
-   // }
- // }
+
   },
     created(){
      let promisse = this.$http.get('http://localhost:3000/v1/fotos');

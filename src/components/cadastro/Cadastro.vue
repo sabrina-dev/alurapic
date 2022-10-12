@@ -54,15 +54,17 @@ export default {
     return {
     foto:  new Foto()
       }
-    }
-  }
+    },
 
   methods: {
   
-  gravar()
-  {this.foto =  new Foto();}
+  gravar(){this.$http
+  .post('http://localhost:3000/v1/fotos', this.foto)
+  .then(() => this.foto = new Foto(), err => console.log(err) );
+  
   }
-
+  }
+}
 
 
 </script>
